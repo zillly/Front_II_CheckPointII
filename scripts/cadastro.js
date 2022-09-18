@@ -1,7 +1,8 @@
 const url = "https://ctd-todo-api.herokuapp.com/v1/users"
-let form = document.querySelector('form')
+let form = document.getElementById('form-cadastro')
 let msgSuccess = document.getElementById('msgSucesso')
 let msgError = document.getElementById('msgErr')
+
 
 let iNome = document.getElementById('nome')
 let labelNome = document.getElementById('labelNome')
@@ -122,19 +123,27 @@ form.addEventListener("submit" , function (evento){
   }
   
   let criarCadastro = {
-      firstName: iNome.value,
-      lastName: iSobrenome.value,
-      email: iEmail.value,
-      password: iSenha.value
+      "firstName": iNome.value,
+      "lastName": iSobrenome.value,
+      "email": iEmail.value,
+      "password": iSenha.value
     }
     
     let cadastroApi = {
       method: 'POST',
       body: JSON.stringify(criarCadastro),
+      headers: {
+        'Content-Type': 'application/json'
+    }
     }
   
 fetch(url,cadastroApi)
-.then( localStorage.setItem('user', JSON.stringify(cadastroApi)))
+.then(function (reposta){
+  return reposta.json()
+}).then(function(data){
+  console.log(data);
+})
+
 
 
 }
