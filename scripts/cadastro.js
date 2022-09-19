@@ -107,13 +107,15 @@ iEmail.addEventListener('keyup' , ()=>{
 })
 
 
+
+
 form.addEventListener("submit" , function (evento){
   evento.preventDefault()
   if(validNome && validSobrenome && validSenha && validRsenha && validEmail){
     msgSuccess.setAttribute('style', 'display: block')
-    msgSuccess.innerHTML = '<strong>Cadastrando usuário...</strong>'
-    msgError.setAttribute('style', 'display: none')
-    msgError.innerHTML = ''
+      msgSuccess.innerHTML = '<strong>Cadastrando usuário...</strong>'
+      msgError.setAttribute('style', 'display: none')
+      msgError.innerHTML = ''
   } 
   else {
     msgError.setAttribute('style', 'display: block')
@@ -134,17 +136,31 @@ form.addEventListener("submit" , function (evento){
       body: JSON.stringify(criarCadastro),
       headers: {
         'Content-Type': 'application/json'
+      }
     }
-    }
-  
-fetch(url,cadastroApi)
-.then(function (reposta){
-  return reposta.json()
-}).then(function(data){
-  console.log(data);
+    
+    
+    fetch(url,cadastroApi)
+    .then(reposta => {
+      if(reposta.status === 400){
+        msgError.setAttribute('style', 'display: block')
+        msgError.innerHTML = '<strong>email já cadastrado</strong>'
+        msgSuccess.innerHTML = ''
+        msgSuccess.setAttribute('style', 'display: none')
+      } 
+      else{
+          msgSuccess.setAttribute('style', 'display: block')
+            msgSuccess.innerHTML = '<strong>sucesso.</strong>'
+            msgError.setAttribute('style', 'display: none')
+            msgError.innerHTML = ''
+            
+        }
+      
+      return reposta.json()
+    }).then(data => {
+      console.log(data);
+      return data
+    })
+
 })
 
-
-
-}
-)
