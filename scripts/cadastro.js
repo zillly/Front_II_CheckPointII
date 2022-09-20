@@ -141,8 +141,8 @@ form.addEventListener("submit" , function (evento){
     
     
     fetch(url,cadastroApi)
-    .then(reposta => {
-      if(reposta.status === 400){
+    .then(resposta => {
+      if(resposta.status === 400){
         msgError.setAttribute('style', 'display: block')
         msgError.innerHTML = '<strong>email já cadastrado</strong>'
         msgSuccess.innerHTML = ''
