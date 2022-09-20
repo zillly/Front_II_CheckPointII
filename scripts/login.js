@@ -31,7 +31,7 @@ form.addEventListener('submit', function (evento) {
             msgError.innerHTML = '<strong>Senha Incorreta </strong>'
                 
         }
-        else {
+        else if (resposta.status === 201){ 
             
            let body = await resposta.json()
            const usuario = body.jwt
@@ -39,14 +39,11 @@ form.addEventListener('submit', function (evento) {
             localStorage.setItem('user', usuario);
             window.location.href = '/tarefas.html'
 
+        }else{
+            msgError.setAttribute('style', 'display: block')
+            msgError.innerHTML = '<strong>Erro desconhecido</strong>'
         }
          //console.log(resposta.json());
         })
-        .then(data => {
-            
-            
-            
-            
-        form.reset();
-        })
+        
 });
