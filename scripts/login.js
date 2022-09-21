@@ -34,16 +34,17 @@ form.addEventListener('submit', function (evento) {
         else if (resposta.status === 201){ 
             
            let body = await resposta.json()
-           const usuario = body.jwt
-
-            localStorage.setItem('user', usuario);
-            window.location.href = '/tarefas.html'
-
+           const usuarioToken = body.jwt
+           localStorage.setItem('token', usuarioToken);
+           location.replace('/tarefas.html');
+           
         }else{
             msgError.setAttribute('style', 'display: block')
-            msgError.innerHTML = '<strong>Erro desconhecido</strong>'
+            msgError.innerHTML = '<strong>Erro desconhecido </strong>'
         }
-         //console.log(resposta.json());
-        })
         
-});
+        //console.log(resposta.json());
+    })
+   
+    });
+    

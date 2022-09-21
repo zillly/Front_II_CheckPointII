@@ -150,7 +150,7 @@ form.addEventListener("submit" , function (evento){
       } 
       else{
           msgSuccess.setAttribute('style', 'display: block')
-            msgSuccess.innerHTML = '<strong>sucesso.</strong>'
+            msgSuccess.innerHTML = '<strong>Sucesso.</strong>'
             msgError.setAttribute('style', 'display: none')
             msgError.innerHTML = ''
             
@@ -159,7 +159,6 @@ form.addEventListener("submit" , function (evento){
       return reposta.json()
     }).then(data => {
       console.log(data);
-      return data
     })
 
 })
