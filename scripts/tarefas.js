@@ -35,7 +35,7 @@ window.addEventListener('load', function () {
   
   const urlTareas = 'https://ctd-todo-api.herokuapp.com/v1/tasks'
   const formTarefa = document.querySelector('.nova-tarefa');
-  const novaTarefa = document.getElementById('#novaTarefa');
+  const novaTarefa = document.getElementById('novaTarefa');
 
 
   
