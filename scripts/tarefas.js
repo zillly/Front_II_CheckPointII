@@ -20,6 +20,8 @@ window.addEventListener('load', function () {
          if (resposta.status === 200){
              let user = await resposta.json()
              userName.innerText =`${user.firstName} ${user.lastName}`
+             
+            
             }
           })
           

@@ -147,6 +147,11 @@ form.addEventListener("submit" , function (evento){
         msgError.innerHTML = '<strong>email já cadastrado</strong>'
         msgSuccess.innerHTML = ''
         msgSuccess.setAttribute('style', 'display: none')
+      }else if(resposta.status === 500){
+        msgError.setAttribute('style', 'display: block')
+        msgError.innerHTML = '<strong>Erro</strong>'
+        msgSuccess.innerHTML = ''
+        msgSuccess.setAttribute('style', 'display: none')
       } 
       else{
           msgSuccess.setAttribute('style', 'display: block')
@@ -156,9 +161,7 @@ form.addEventListener("submit" , function (evento){
             
         }
       
-      return reposta.json()
-    }).then(data => {
-      console.log(data);
+      
     })
 
 })
