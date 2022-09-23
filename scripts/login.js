@@ -5,7 +5,7 @@ let senha = document.getElementById('inputPassword')
 let labelEmail = document.getElementById('labelEmail')
 let msgError = document.getElementById('msgErr')
 let button = document.getElementById('acessar')
-let url = 'https://ctd-todo-api.herokuapp.com/v1/users/login';
+let url = 'https://ctd-fe2-todo-v2.herokuapp.com/v1/users/login';
 let emailOk = false
 let senhaOk = false
 

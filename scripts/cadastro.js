@@ -1,4 +1,4 @@
-const url = "https://ctd-todo-api.herokuapp.com/v1/users"
+const url = "https://ctd-fe2-todo-v2.herokuapp.com/v1/users/"
 let form = document.getElementById('form-cadastro')
 let msgSuccess = document.getElementById('msgSucesso')
 let msgError = document.getElementById('msgErr')
@@ -154,7 +154,7 @@ form.addEventListener("submit" , function (evento){
         msgSuccess.setAttribute('style', 'display: none')
       } 
       else{
-          msgSuccess.setAttribute('style', 'display: block')
+            msgSuccess.setAttribute('style', 'display: block')
             msgSuccess.innerHTML = '<strong>Sucesso.</strong>'
             msgError.setAttribute('style', 'display: none')
             msgError.innerHTML = ''
