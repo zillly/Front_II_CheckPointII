@@ -1,8 +1,3 @@
-//Verificando se existe um usuario no localStorage
-
-if (!localStorage.user) {
-  location.replace("index.html");
-}
 
 //criando a logica para carregar a pagina
 window.addEventListener("load", function () {
@@ -23,8 +18,8 @@ window.addEventListener("load", function () {
   });
 
   const urlTarefas = "https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks";
-  const usuario = localStorage.user
-  const token = usuario
+  const token = localStorage.user
+ 
 
   const criarTarefa = document.querySelector(".nova-tarefa");
   const novaTarefa = document.querySelector("#novaTarefa");
