@@ -6,9 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do App</title>
-
+ 
   <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
   <link rel="stylesheet" href="styles/acesso.css">
+                                  <!-- icons -->
+<script src="https://kit.fontawesome.com/f3dcfe94d2.js" crossorigin="anonymous"></script>
 
   
 </head>
@@ -19,7 +21,7 @@
   </div>
   
   <div class="right">
-    <form>
+    <form id="form-login">
       <div class="form-header">
         <p>To-Do App</p>
       </div>
@@ -27,13 +29,17 @@
       <div id="msgErr"></div>
       <label id="labelEmail">
         Email:
+      </label>
         <input id="inputEmail" type="email">
-      </label>
-      <label id="labelSenha">
+        
+        <div class="container-senha login">
+        <label id="labelSenha">
         Senha:
-        <input id="inputPassword" type="password">
       </label>
-      
+        <input id="inputPassword" type="password">
+        <i id="verSenha" class="fa-solid fa-eye"></i>
+        <i id="esconderSenha"class="fa-solid fa-eye-slash"></i>
+      </div>
       <button id="acessar" type="submit">Acessar</button>
       
     </form>

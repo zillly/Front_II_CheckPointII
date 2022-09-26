@@ -16,6 +16,8 @@ let iEmail = document.getElementById('email')
 let labelEmail = document.getElementById('labelEmail')
 let validEmail = false
 
+
+
 let iSenha = document.getElementById('senha')
 let labelSenha = document.getElementById('labelSenha')
 let validSenha = false
@@ -23,6 +25,60 @@ let validSenha = false
 let rSenha = document.getElementById('rSenha')
 let labelRsenha = document.getElementById('labelRsenha')
 let validRsenha = false
+
+// variaveis Globais ver e esconder
+let verSenha = document.querySelector("#verSenha")
+let esconderSenha = document.querySelector("#esconderSenha")
+let esconderConfirSenha = document.querySelector("#esconderConfirSenha")
+let verSenhaConfirmarSenha = document.querySelector("#verSenhaConfirmarSenha")
+// evento de monstrar senha
+
+esconderSenha.addEventListener("click",()=> {
+   
+    if(iSenha.getAttribute("type") == "password" ){
+        iSenha.setAttribute("type","text")
+        esconderSenha.setAttribute("style","display: none")
+        verSenha.setAttribute("style","display: block")  
+    }else{
+        iSenha.setAttribute("type","password")
+    }
+})
+
+// evento de mostrar senha
+verSenha.addEventListener("click",()=> {
+    
+    if(iSenha.getAttribute("type") == "text" ){
+        iSenha.setAttribute("type","password")
+        verSenha.setAttribute("style","display: none")
+        esconderSenha.setAttribute("style","display:block")
+         
+    }else{
+        iSenha.setAttribute("type","text")
+    }
+})
+
+esconderConfirSenha.addEventListener("click",()=> {
+  if(rSenha.getAttribute("type") == "password" ){
+      rSenha.setAttribute("type","text")
+      esconderConfirSenha.setAttribute("style","display: none")
+      verSenhaConfirmarSenha.setAttribute("style","display: block")  
+      
+     }else{
+       rSenha.setAttribute("type","password")
+     }
+})
+
+verSenhaConfirmarSenha.addEventListener("click",()=> {
+
+if(rSenha.getAttribute("type") == "text" ){
+   rSenha.setAttribute("type","password")
+   verSenhaConfirmarSenha.setAttribute("style","display: none")
+   esconderConfirSenha.setAttribute("style","display:block")
+    
+}else{
+   rSenha.setAttribute("type","text")
+}
+})
 
 function validaEmail(email) {
   let emailPattern =
@@ -112,10 +168,11 @@ iEmail.addEventListener('keyup' , ()=>{
 form.addEventListener("submit" , function (evento){
   evento.preventDefault()
   if(validNome && validSobrenome && validSenha && validRsenha && validEmail){
-    msgSuccess.setAttribute('style', 'display: block')
+      msgSuccess.setAttribute('style', 'display: block')
       msgSuccess.innerHTML = '<strong>Cadastrando usuário...</strong>'
       msgError.setAttribute('style', 'display: none')
       msgError.innerHTML = ''
+      animarBarra()
   } 
   else {
     msgError.setAttribute('style', 'display: block')
@@ -143,15 +200,22 @@ form.addEventListener("submit" , function (evento){
     fetch(url,cadastroApi)
     .then(resposta => {
       if(resposta.status === 400){
-        msgError.setAttribute('style', 'display: block')
-        msgError.innerHTML = '<strong>email já cadastrado</strong>'
-        msgSuccess.innerHTML = ''
-        msgSuccess.setAttribute('style', 'display: none')
+        setTimeout(() => {
+          msgError.setAttribute('style', 'display: block')
+          msgError.innerHTML = '<strong>email já cadastrado</strong>'
+          msgSuccess.innerHTML = ''
+          msgSuccess.setAttribute('style', 'display: none')
+        }, 3000);
       }else if(resposta.status === 201){
-        msgSuccess.setAttribute('style', 'display: block')
-        msgSuccess.innerHTML = '<strong>Sucesso.</strong>'
-        msgError.setAttribute('style', 'display: none')
-        msgError.innerHTML = ''
+        setTimeout(() => {
+          window.location.href = "index.html"
+        }, 5000);
+        setTimeout(() => {
+          msgSuccess.setAttribute('style', 'display: block')
+          msgSuccess.innerHTML = '<strong>Sucesso.</strong>'
+          msgError.setAttribute('style', 'display: none')
+          msgError.innerHTML = ''
+        }, 3000);
       } 
       else{
         msgError.setAttribute('style', 'display: block')

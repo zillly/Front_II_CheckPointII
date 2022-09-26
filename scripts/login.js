@@ -8,29 +8,62 @@ let button = document.getElementById('acessar')
 let url = 'https://ctd-fe2-todo-v2.herokuapp.com/v1/users/login';
 let emailOk = false
 let senhaOk = false
+let verSenha = document.querySelector("#verSenha");
+let esconderSenha = document.querySelector("#esconderSenha");
 
-function habilitarButtonSubmit() {
+esconderSenha.addEventListener("click",()=> {
+   
+    if(senha.getAttribute("type") == "password" ){
+        senha.setAttribute("type","text")
+        esconderSenha.setAttribute("style","display: none")
+        verSenha.setAttribute("style","display: block")  
+    }else{
+        senha.setAttribute("type","password")
+    }
+})
+
+// evento de mostrar senha
+verSenha.addEventListener("click",()=> {
+    
+    if(senha.getAttribute("type") == "text" ){
+        senha.setAttribute("type","password")
+        verSenha.setAttribute("style","display: none")
+        esconderSenha.setAttribute("style","display:block")
+         
+    }else{
+        senha.setAttribute("type","text")
+    }
+})
+
+function buttOn() {
     button.disabled = false
     button.innerText = 'Acessar'
     button.style.background = '#7898FF'
 }
 
-function desabilitarButtonSubmit() {
+function buttOff() {
     button.disabled = true
     button.innerText = 'Bloqueado'
     button.style.background = 'grey'
 }
 
-desabilitarButtonSubmit()
+buttOff()
 
 email.onkeyup = () => {
     email.value = email.value.trim()
 
     if (email.value === "") {
         emailOk = false
+        labelEmail.setAttribute("style", "color:  red")
+        labelEmail.innerHTML = "Email: Insira email"
+        email.setAttribute('style', 'border-color: red')
+        attButton()
     } else {
         emailOk = true
-        atualizarStatusButtonSubmit()
+        labelEmail.setAttribute("style", "color:  green")
+        labelEmail.innerHTML = "Email:"
+        email.setAttribute('style', 'border-color: green')
+        attButton()
     }
 }
 
@@ -39,30 +72,37 @@ senha.onkeyup = () => {
 
     if (senha.value === "") {
         senhaOk = false
+        labelSenha.setAttribute("style", "color:  red")
+        labelSenha.innerHTML = "Senha: Insira senha"
+        senha.setAttribute('style', 'border-color: red')
+        attButton()
     } else {
         senhaOk = true
-        atualizarStatusButtonSubmit()
+        labelSenha.setAttribute("style", "color:  green")
+        labelSenha.innerHTML = "Senha:"
+        senha.setAttribute('style', 'border-color: green')
+       attButton()
     }
 }
-    function oFormEstaOk() {
+    function formPronto() {
          if (emailOk && senhaOk) {
             return true
         } else {
             return false
         }
     }
-    function atualizarStatusButtonSubmit() {
-        if (oFormEstaOk()) {
-            habilitarButtonSubmit()
+    function attButton() {
+        if (formPronto()) {
+            buttOn()
         } else {
-            desabilitarButtonSubmit()
+            buttOff()
         }
     }
     
 
 form.addEventListener('submit', function (evento) {
     evento.preventDefault();
-    if (oFormEstaOk()) {
+    if (formPronto()) {
         realizarLogin()
     }
 function realizarLogin(){
@@ -83,11 +123,12 @@ function realizarLogin(){
         if(resposta.status === 404){
             msgError.setAttribute('style', 'display: block')
             msgError.innerHTML = '<strong>Usuario não existe</strong>'
+            email.focus()
         } 
         else if (resposta.status === 400){
             msgError.setAttribute('style', 'display: block')
             msgError.innerHTML = '<strong>Senha Incorreta </strong>'
-            
+            senha.focus();
         }
         else if (resposta.status === 201){ 
             
