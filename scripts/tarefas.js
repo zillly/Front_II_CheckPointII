@@ -1,8 +1,13 @@
 
 //criando a logica para carregar a pagina
 window.addEventListener("load", function () {
-  //mostrar o nome do usuario no nav
+
+  const criarTarefa = document.querySelector(".nova-tarefa");
+  const novaTarefa = document.querySelector("#novaTarefa");
   const userName = document.querySelector(".user-info p");
+  const urlTarefas = "https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks";
+  const token = localStorage.user
+  const urlLogado = "https://ctd-fe2-todo-v2.herokuapp.com/v1/users/getMe";
 
   //criando a funcao de sair 
   const btnFecharSessão = document.querySelector("#closeApp");
@@ -15,9 +20,6 @@ window.addEventListener("load", function () {
     }
   });
 
-  const urlTarefas = "https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks";
-  const token = localStorage.user
-  const urlLogado = "https://ctd-fe2-todo-v2.herokuapp.com/v1/users/getMe";
   //obter lista de usuarios GET
 
   const configuracao = {
@@ -39,14 +41,13 @@ window.addEventListener("load", function () {
       }
       localStorage.setItem("userLogado", JSON.stringify(usuarioLogado));
 
+      //mostrar o nome do usuario no nav
       userName.innerText = usuarioLogado.firstName + " " + usuarioLogado.lastName;
 
       console.log(usuarioLogado);
     })
     .catch((error) => console.log(error));
 
-  const criarTarefa = document.querySelector(".nova-tarefa");
-  const novaTarefa = document.querySelector("#novaTarefa");
 
   consultarTarefas();
 
