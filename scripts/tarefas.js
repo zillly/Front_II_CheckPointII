@@ -1,10 +1,8 @@
 
 //criando a logica para carregar a pagina
 window.addEventListener("load", function () {
-//mostrar o nome do usuario no nav
+  //mostrar o nome do usuario no nav
   const userName = document.querySelector(".user-info p");
-  
-  
 
   //criando a funcao de sair 
   const btnFecharSessão = document.querySelector("#closeApp");
@@ -19,7 +17,7 @@ window.addEventListener("load", function () {
 
   const urlTarefas = "https://ctd-fe2-todo-v2.herokuapp.com/v1/tasks";
   const token = localStorage.user
- 
+
 
   const criarTarefa = document.querySelector(".nova-tarefa");
   const novaTarefa = document.querySelector("#novaTarefa");
@@ -30,9 +28,6 @@ window.addEventListener("load", function () {
 
   criarTarefa.addEventListener("submit", function (event) {
     event.preventDefault();
-    console.log("Criar Tarefa");
-    console.log(novaTarefa.value);
-
     const carregarTarefa = {
       description: novaTarefa.value.trim(),
     };
@@ -44,7 +39,6 @@ window.addEventListener("load", function () {
         authorization: token,
       },
     };
-    console.log("Criando uma tarefa no banco de dados");
     fetch(urlTarefas, tarefaConfig)
       .then((response) => response.json())
       .then((tarea) => {
@@ -66,7 +60,6 @@ window.addEventListener("load", function () {
         authorization: token,
       },
     };
-    console.log("verificando minhas tarefas");
     fetch(urlTarefas, settings)
       .then((response) => response.json())
       .then((tarefas) => {
@@ -104,12 +97,10 @@ window.addEventListener("load", function () {
                             <div class="done"></div>
                             <div class="descricao">
                             <div>
-                                <button><i id="${
-                                  tarefa.id
-                                }" class="fas fa-undo-alt change"></i></button>
-                                <button><i id="${
-                                  tarefa.id
-                                }" class="far fa-trash-alt"></i></button>
+                                <button><i id="${tarefa.id
+          }" class="fas fa-undo-alt change"></i></button>
+                                <button><i id="${tarefa.id
+          }" class="far fa-trash-alt"></i></button>
                             </div>
                                 <p class="nome">${tarefa.description}</p>
                                 <p class="timestamp"><i class="far fa-calendar-alt"></i>${encontrarData.toLocaleDateString()} <i class="far fa-clock"></i>${encontrarData.getHours()}:${encontrarData.getMinutes()}</p>
@@ -120,9 +111,8 @@ window.addEventListener("load", function () {
         //enviamos para a lista de tarefas finalizadas
         tarefasPendentes.innerHTML += `
                         <li class="tarefa">
-                            <div class="not-done change" id="${
-                              tarefa.id
-                            }"></div>
+                            <div class="not-done change" id="${tarefa.id
+          }"></div>
                             <div class="descricao">
                                 <p class="nome">${tarefa.description}</p>
                                 <p class="timestamp"><i class="far fa-calendar-alt"></i>${encontrarData.toLocaleDateString()} <i class="far fa-clock"></i>${encontrarData.getHours()}:${encontrarData.getMinutes()}</p>
@@ -184,27 +174,28 @@ window.addEventListener("load", function () {
             Authorization: token,
           },
         };
-        fetch(url, alterarConfiguracoes).then((response) => {
-          console.log(response.status);
-          //renderiza as tarefas novamente
+        fetch(url, alterarConfiguracoes)
+          .then((response) => {
+            console.log(response.status);
+            //renderiza as tarefas novamente
 
-          consultarTarefas();
-        });
+            consultarTarefas();
+          });
       });
     });
   }
   const urlLogado = "https://ctd-fe2-todo-v2.herokuapp.com/v1/users/getMe";
   //obter lista de usuarios GET
-  
+
   const configuracao = {
     method: "GET",
     headers: {
       authorization: token,
     },
   };
-  console.log("verificando meus usuarios");
+
   fetch(urlLogado, configuracao)
-  
+
     .then((response) => response.json())
     .then((usuario) => {
       let usuarioLogado = {
@@ -214,10 +205,14 @@ window.addEventListener("load", function () {
         email: usuario.email
       }
       localStorage.setItem("userLogado", JSON.stringify(usuarioLogado));
-      
+
       userName.innerText = usuarioLogado.firstName + " " + usuarioLogado.lastName;
-          
+
       console.log(usuarioLogado);
     })
     .catch((error) => console.log(error));
 });
+
+if (!localStorage.user) {
+  location.replace("index.html");
+}

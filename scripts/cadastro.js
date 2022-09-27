@@ -87,9 +87,9 @@ function validaEmail(email) {
 }
 
 iNome.addEventListener('keyup' , ()=>{
-  if (iNome.value.length <= 5) {
+  if (iNome.value.length <= 3) {
    labelNome.setAttribute("style", "color:  red")
-   labelNome.innerHTML = "Nome Insira no minino 5 caracteres"
+   labelNome.innerHTML = "Nome Insira no minino 3 caracteres"
    iNome.setAttribute('style', 'border-color: red')
    validNome = false
     
@@ -102,9 +102,9 @@ iNome.addEventListener('keyup' , ()=>{
 })
 
 iSobrenome.addEventListener('keyup' , ()=>{
-  if (iSobrenome.value.length <= 6) {
+  if (iSobrenome.value.length <= 3) {
    labelSobrenome.setAttribute("style", "color:  red")
-   labelSobrenome.innerHTML = "Sobrenome Insira no minino 6 caracteres"
+   labelSobrenome.innerHTML = "Sobrenome Insira no minino 3 caracteres"
    iSobrenome.setAttribute('style', 'border-color: red')
    validSobrenome = false
     
@@ -208,7 +208,7 @@ form.addEventListener("submit" , function (evento){
         }, 3000);
       }else if(resposta.status === 201){
         setTimeout(() => {
-          window.location.href = "index.html"
+          location.assign("./index.html")
         }, 5000);
         setTimeout(() => {
           msgSuccess.setAttribute('style', 'display: block')
